@@ -1,4 +1,5 @@
-﻿using Parquet;
+﻿using Microsoft.Extensions.Configuration;
+using Parquet;
 using Parquet.Data;
 using System;
 using System.Collections;
@@ -11,51 +12,24 @@ namespace CsvToParquetConverter
 {
     internal class Program
     {
-        public static void TryDefinType(string input, out Type type, out object value)
+        static IConfiguration config;
+
+        public static void SetUpConfig()
         {
-            if (DateTimeOffset.TryParse(input, out var datetime))
-            {
-                value = datetime;
-                type = datetime.GetType();
-                return;
-            }
-
-            if (int.TryParse(input, out var intNumber))
-            {
-                value = intNumber;
-                type = intNumber.GetType();
-                return;
-            }
-
-            if (decimal.TryParse(input, out var floatNumber))
-            {
-                value = floatNumber;
-                type = floatNumber.GetType();
-                return;
-            }
-
-            if (string.IsNullOrEmpty(input?.Trim()))
-            {
-                value = null;
-                type = typeof(string);
-                return;
-            }
-
-            type = typeof(string);
-            value = input;
+            config = new ConfigurationBuilder()
+                       .AddJsonFile("appsettings.json")
+                       .AddJsonFile($"appsettings.Development.json", true, true)
+                       .AddEnvironmentVariables()
+                       .Build();
         }
 
-        static Type GetNullableType(Type type)
-        {
-            // Use Nullable.GetUnderlyingType() to remove the Nullable<T> wrapper if type is already nullable.
-            type = Nullable.GetUnderlyingType(type) ?? type; // avoid type becoming null
-            if (type.IsValueType)
-                return typeof(Nullable<>).MakeGenericType(type);
-            else
-                return type;
-        }
+
         static void Main(string[] args)
         {
+            SetUpConfig();
+
+            var filesFolder = config["FilesFolder"];
+
             Console.WriteLine("Enter the name of file:");
 
             var nameOfFile = Console.ReadLine();
@@ -65,7 +39,7 @@ namespace CsvToParquetConverter
 
             List<CsvColumn> columns = new List<CsvColumn>();
 
-            using (var reader = new StreamReader($@"C:\MyOwnProgects\CsvToParquetConverter\testsFiles\{nameOfFile}.csv"))
+            using (var reader = new StreamReader($@"{filesFolder}{nameOfFile}.csv"))
             {
                 bool isHeader = true;
                 while (!reader.EndOfStream)
@@ -116,10 +90,7 @@ namespace CsvToParquetConverter
 
             var schema = new Schema(parquetColums.Select(x => x.Field).ToList());
 
-            if (!Directory.Exists("parquetts"))
-                Directory.CreateDirectory("parquetts");
-
-            using (Stream fileStream = System.IO.File.Create($@"C:\MyOwnProgects\CsvToParquetConverter\testsFiles\{nameOfFile}.parquet"))
+            using (Stream fileStream = System.IO.File.Create($@"{filesFolder}{nameOfFile}.parquet"))
             {
                 using (var parquetWriter = new ParquetWriter(schema, fileStream))
                 {
@@ -133,5 +104,50 @@ namespace CsvToParquetConverter
                 }
             }
         }
+
+        static void TryDefinType(string input, out Type type, out object value)
+        {
+            if (DateTimeOffset.TryParse(input, out var datetime))
+            {
+                value = datetime;
+                type = datetime.GetType();
+                return;
+            }
+
+            if (int.TryParse(input, out var intNumber))
+            {
+                value = intNumber;
+                type = intNumber.GetType();
+                return;
+            }
+
+            if (decimal.TryParse(input, out var floatNumber))
+            {
+                value = floatNumber;
+                type = floatNumber.GetType();
+                return;
+            }
+
+            if (string.IsNullOrEmpty(input?.Trim()))
+            {
+                value = null;
+                type = typeof(string);
+                return;
+            }
+
+            type = typeof(string);
+            value = input;
+        }
+
+        static Type GetNullableType(Type type)
+        {
+            // Use Nullable.GetUnderlyingType() to remove the Nullable<T> wrapper if type is already nullable.
+            type = Nullable.GetUnderlyingType(type) ?? type; // avoid type becoming null
+            if (type.IsValueType)
+                return typeof(Nullable<>).MakeGenericType(type);
+            else
+                return type;
+        }
+
     }
 }
