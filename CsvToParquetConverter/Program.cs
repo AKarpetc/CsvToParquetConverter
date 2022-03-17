@@ -30,9 +30,31 @@ namespace CsvToParquetConverter
 
             var filesFolder = config["FilesFolder"];
 
-            Console.WriteLine("Enter the name of file:");
+            Console.WriteLine("0-print particular file");
+            Console.WriteLine("1-print all files in the folder");
+            var option = Convert.ToInt32(Console.ReadLine());
 
-            var nameOfFile = Console.ReadLine();
+            if (option == 0)
+            {
+
+                Console.WriteLine("Enter the name of file:");
+                var fileName = Console.ReadLine();
+
+                ConvertToParquet(filesFolder, fileName);
+            }
+            else
+            {
+
+                DirectoryInfo info = new DirectoryInfo(filesFolder);
+                foreach (var file in info.GetFiles("*.csv", SearchOption.TopDirectoryOnly)
+                                              .OrderByDescending(p => p.CreationTime).ToList())
+                    ConvertToParquet(filesFolder, file.Name);
+            }
+            Console.WriteLine("Done!!!!");
+        }
+
+        private static void ConvertToParquet(string filesFolder, string nameOfFile)
+        {
 
             if (nameOfFile.Contains(".csv", StringComparison.OrdinalIgnoreCase))
                 nameOfFile = nameOfFile.Replace(".csv", "");
@@ -58,6 +80,7 @@ namespace CsvToParquetConverter
                     {
                         columns[i].Values.Add(values[i]);
                     }
+
                 }
             }
 
@@ -65,7 +88,7 @@ namespace CsvToParquetConverter
 
             foreach (var column in columns)
             {
-                TryDefinType(column.Values.FirstOrDefault(x => !string.IsNullOrEmpty(x)), out var type, out var value);
+                TryDefinType(column.Values.FirstOrDefault(x => !string.IsNullOrEmpty(x?.Trim() ?? "") && x != "NULL"), out var type, out var value);
                 var typeConverter = new TypeConverter();
 
                 var arrayValues = new ArrayList();
@@ -79,7 +102,7 @@ namespace CsvToParquetConverter
                         continue;
                     }
 
-                    var castedResult = Convert.ChangeType(result, valueType);
+                    var castedResult = System.Convert.ChangeType(result, valueType);
 
                     arrayValues.Add(castedResult);
                 }
@@ -103,21 +126,16 @@ namespace CsvToParquetConverter
                     }
                 }
             }
+
         }
 
         static void TryDefinType(string input, out Type type, out object value)
         {
+
             if (DateTimeOffset.TryParse(input, out var datetime))
             {
                 value = datetime;
                 type = datetime.GetType();
-                return;
-            }
-
-            if (int.TryParse(input, out var intNumber))
-            {
-                value = intNumber;
-                type = intNumber.GetType();
                 return;
             }
 
@@ -128,7 +146,14 @@ namespace CsvToParquetConverter
                 return;
             }
 
-            if (string.IsNullOrEmpty(input?.Trim()))
+            if (int.TryParse(input, out var intNumber))
+            {
+                value = intNumber;
+                type = intNumber.GetType();
+                return;
+            }
+
+            if (string.IsNullOrEmpty(input?.Trim()) || string.Equals(input?.Trim(), "NULL"))
             {
                 value = null;
                 type = typeof(string);

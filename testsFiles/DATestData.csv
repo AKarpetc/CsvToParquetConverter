@@ -1,0 +1,22 @@
+Id;Date;Birthday;Sex;RegistrationDateTime;SF-Score;MedicationCount;Type;SubType;Name;NumberValue;DateTimeValue;StringValue;Score;AdherenceScore;Created
+ec20b125f8049b4e51f21ce76ab6edb45961dfc771f09f525e9eb8eaa8bf2f20;22.02.2022;23.02.1970;Male;02.02.2022;5;2;Patient;;AutontificatedDate;;02.02.2022 00:00;;0;;02.02.2022 00:10
+ec20b125f8049b4e51f21ce76ab6edb45961dfc771f09f525e9eb8eaa8bf2f20;22.02.2022;23.02.1970;Male;02.02.2022;5;2;Patient;;GracePeriodEndDate;;02.02.2022 00:00;;0;;03.02.2022 00:10
+ec20b125f8049b4e51f21ce76ab6edb45961dfc771f09f525e9eb8eaa8bf2f20;22.02.2022;23.02.1970;Male;02.02.2022;5;2;ICIQ;;UrineLeakageOccur;;;whenCoughingSneezingWalkingEtc;0;;04.02.2022 00:10
+ec20b125f8049b4e51f21ce76ab6edb45961dfc771f09f525e9eb8eaa8bf2f20;22.02.2022;23.02.1970;Male;02.02.2022;5;2;ICIQ;;UrineLeakageOccur;;;beforeYouCanReachTheToilet;0;;04.02.2022 00:10
+ec20b125f8049b4e51f21ce76ab6edb45961dfc771f09f525e9eb8eaa8bf2f20;22.02.2022;23.02.1970;Male;02.02.2022;5;2;ICIQ;;UrineLossTimes;;;onceAWeekOrLessOften;1;;04.02.2022 00:10
+ec20b125f8049b4e51f21ce76ab6edb45961dfc771f09f525e9eb8eaa8bf2f20;22.02.2022;23.02.1970;Male;02.02.2022;5;2;Trackers;;waterDailyTracker;1500;;;0; ;05.02.2022 00:10
+ec20b125f8049b4e51f21ce76ab6edb45961dfc771f09f525e9eb8eaa8bf2f20;22.02.2022;23.02.1970;Male;02.02.2022;5;2;Trackers;;coffeeDailyTracker;2;;;0;50,00;05.02.2022 00:10
+ec20b125f8049b4e51f21ce76ab6edb45961dfc771f09f525e9eb8eaa8bf2f20;22.02.2022;23.02.1970;Male;02.02.2022;5;2;Trackers;;micturitionDailyTracker;20;;;0;;05.02.2022 00:10
+ec20b125f8049b4e51f21ce76ab6edb45961dfc771f09f525e9eb8eaa8bf2f20;22.02.2022;23.02.1970;Male;02.02.2022;5;2;Trackers;;waterDailyTracker;1500;;;0;70,00;06.02.2022 00:10
+ec20b125f8049b4e51f21ce76ab6edb45961dfc771f09f525e9eb8eaa8bf2f20;22.02.2022;23.02.1970;Male;02.02.2022;5;2;MedicationTracker;Medication1;StartDate;;02.01.2022 00:00;;0;;07.02.2022 00:10
+ec20b125f8049b4e51f21ce76ab6edb45961dfc771f09f525e9eb8eaa8bf2f20;22.02.2022;23.02.1970;Male;02.02.2022;5;2;MedicationTracker;Medication1;EndDate;;28.02.2022 00:00;;0;;08.02.2022 00:10
+ec20b125f8049b4e51f21ce76ab6edb45961dfc771f09f525e9eb8eaa8bf2f20;22.02.2022;23.02.1970;Male;02.02.2022;5;2;MedicationTracker;Medication1;TookDoses;1;;;0;;08.02.2022 00:10
+ec20b125f8049b4e51f21ce76ab6edb45961dfc771f09f525e9eb8eaa8bf2f20;22.02.2022;23.02.1970;Male;02.02.2022;5;2;MedicationTracker;Medication1;PrescribedDoses;2;;;0;;07.02.2022 00:10
+ec20b125f8049b4e51f21ce76ab6edb45961dfc771f09f525e9eb8eaa8bf2f20;22.02.2022;23.02.1970;Male;02.02.2022;5;2;Trackers;;PatientMedicationTracker;2;;;0;50,00;07.02.2022 00:10
+ec20b125f8049b4e51f21ce76ab6edb45961dfc771f09f525e9eb8eaa8bf2f20;22.02.2022;23.02.1970;Male;02.02.2022;5;2;ApplicationUsage;;OpenDateTime;;24.02.2022 17:50;;0;;09.02.2022 00:10
+ec20b125f8049b4e51f21ce76ab6edb45961dfc771f09f525e9eb8eaa8bf2f20;22.02.2022;23.02.1970;Male;02.02.2022;5;2;ApplicationUsage;;CloseDateTime;;24.02.2022 18:00;;0;;10.02.2022 00:10
+ec20b125f8049b4e51f21ce76ab6edb45961dfc771f09f525e9eb8eaa8bf2f20;22.02.2022;23.02.1970;Male;02.02.2022;5;2;PelvicFloorExerciseTracker;;ExercisesCount;4;;;0;;10.02.2022 00:10
+ec20b125f8049b4e51f21ce76ab6edb45961dfc771f09f525e9eb8eaa8bf2f20;22.02.2022;23.02.1970;Male;02.02.2022;5;2;PelvicFloorExerciseTracker;;Phase;4;;;0;;10.02.2022 00:10
+ec20b125f8049b4e51f21ce76ab6edb45961dfc771f09f525e9eb8eaa8bf2f20;22.02.2022;23.02.1970;Male;02.02.2022;5;2;PelvicFloorExerciseTracker;;SelectedPositions ;;;1A2;0;;10.02.2022 00:10
+ec20b125f8049b4e51f21ce76ab6edb45961dfc771f09f525e9eb8eaa8bf2f20;22.02.2022;23.02.1970;Male;02.02.2022;5;2;ApplicationUsage;;Login;;24.02.2022 17:50;;0;;09.02.2022 00:10
+ec20b125f8049b4e51f21ce76ab6edb45961dfc771f09f525e9eb8eaa8bf2f20;22.02.2022;23.02.1970;Male;02.02.2022;5;2;ApplicationUsage;;Urge;;24.02.2022 17:50;;0;;09.02.2022 00:10
